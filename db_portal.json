@@ -1,0 +1,23 @@
+{
+  "links": [],
+  "employees": [
+    {
+      "email": "ojt@callboxinc.com",
+      "addedAt": "2026-05-24T23:41:52.387Z",
+      "role": "viewer",
+      "passcode": "9311"
+    },
+    {
+      "email": "hr@callboxinc.com",
+      "addedAt": "2026-05-24T22:40:14.413Z",
+      "role": "admin",
+      "passcode": "123456789"
+    },
+    {
+      "email": "admin_davao@callboxinc.com",
+      "addedAt": "2026-05-24T22:40:14.413Z",
+      "role": "admin",
+      "passcode": "123456789"
+    }
+  ]
+}
