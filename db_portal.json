@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "links": [
     {
       "id": "redline-dialer",
@@ -61,6 +62,9 @@
       "forInactive": false
     }
   ],
+=======
+  "links": [],
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   "employees": [
     {
       "email": "ojt@callboxinc.com",
@@ -81,4 +85,8 @@
       "passcode": "123456789"
     }
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1

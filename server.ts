@@ -5,7 +5,14 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
+<<<<<<< HEAD
 import prebuiltDb from "./db_portal.json";
+=======
+<<<<<<< HEAD
+import prebuiltDb from "./db_portal.json";
+=======
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 
 dotenv.config();
 
@@ -17,18 +24,34 @@ interface Database {
   employees: any[];
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 // In-memory cache to guarantee operational consistency in Serverless runtime environments
 let databaseCache: Database | null = null;
 
 const DEFAULT_LINKS: any[] = prebuiltDb.links || [];
 
 const DEFAULT_EMPLOYEES = prebuiltDb.employees || [
+<<<<<<< HEAD
+=======
+=======
+const DEFAULT_LINKS: any[] = [];
+
+const DEFAULT_EMPLOYEES = [
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   { email: "hr@callboxinc.com", addedAt: new Date().toISOString(), role: "admin", passcode: "123456789" },
   { email: "admin_davao@callboxinc.com", addedAt: new Date().toISOString(), role: "admin", passcode: "123456789" }
 ];
 
 // Initialize DB file
 function loadDatabase(): Database {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   if (databaseCache) {
     return databaseCache;
   }
@@ -54,12 +77,44 @@ function saveDatabase(db: Database) {
     fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), "utf-8");
   } catch (err) {
     console.warn("Notice: JSON file write is skipped on read-only environments (such as Vercel). Changes will carry over in-memory for the runtime session.", err);
+<<<<<<< HEAD
+=======
+=======
+  try {
+    if (fs.existsSync(DB_FILE)) {
+      const content = fs.readFileSync(DB_FILE, "utf-8");
+      return JSON.parse(content);
+    }
+  } catch (err) {
+    console.error("Error reading database file, resetting:", err);
+  }
+  
+  // Set defaults
+  const db: Database = {
+    links: DEFAULT_LINKS,
+    employees: DEFAULT_EMPLOYEES
+  };
+  saveDatabase(db);
+  return db;
+}
+
+function saveDatabase(db: Database) {
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Error saving database file:", err);
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   }
 }
 
 // MySQL pool pointer and status
 let pool: mysql.Pool | null = null;
 let isMySqlActive = false;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 let isInitializingMySql = false;
 
 // Attempt to initialize MySQL database
@@ -75,6 +130,19 @@ async function getPool(): Promise<mysql.Pool | null> {
   }
 
   isInitializingMySql = true;
+<<<<<<< HEAD
+=======
+=======
+
+// Attempt to initialize MySQL database
+async function initializeMySql() {
+  if (!process.env.DB_HOST) {
+    console.log("No DB_HOST environment variable detected. Defaulting to JSON database storage (db_portal.json).");
+    return;
+  }
+
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   try {
     console.log(`Connecting to MySQL database at ${process.env.DB_HOST}:${process.env.DB_PORT || 3306}...`);
     
@@ -115,10 +183,20 @@ async function getPool(): Promise<mysql.Pool | null> {
     console.warn("Using local db_portal.json file storage mode as backup.");
     pool = null;
     isMySqlActive = false;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   } finally {
     isInitializingMySql = false;
   }
   return pool;
+<<<<<<< HEAD
+=======
+=======
+  }
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 }
 
 async function createTablesIfNotExist() {
@@ -170,10 +248,22 @@ async function createTablesIfNotExist() {
 
 // Abstract database access methods
 async function getAllLinks(): Promise<any[]> {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       const [rows]: [any[], any] = await activePool.query("SELECT * FROM links ORDER BY createdAt DESC");
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      const [rows]: [any[], any] = await pool.query("SELECT * FROM links ORDER BY createdAt DESC");
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
       return rows.map(row => ({
         ...row,
         forInactive: !!row.forInactive
@@ -187,10 +277,22 @@ async function getAllLinks(): Promise<any[]> {
 }
 
 async function getAllEmployees(): Promise<any[]> {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       const [rows]: [any[], any] = await activePool.query("SELECT * FROM employees ORDER BY addedAt DESC");
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      const [rows]: [any[], any] = await pool.query("SELECT * FROM employees ORDER BY addedAt DESC");
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
       return rows;
     } catch (err) {
       console.error("MySQL query error for employees, fallback to JSON:", err);
@@ -202,10 +304,22 @@ async function getAllEmployees(): Promise<any[]> {
 
 async function getEmployee(email: string): Promise<any | null> {
   const cleanEmail = email.trim().toLowerCase();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       const [rows]: [any[], any] = await activePool.query("SELECT * FROM employees WHERE LOWER(email) = ?", [cleanEmail]);
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      const [rows]: [any[], any] = await pool.query("SELECT * FROM employees WHERE LOWER(email) = ?", [cleanEmail]);
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
       return rows.length > 0 ? rows[0] : null;
     } catch (err) {
       console.error("MySQL query error findEmployee, fallback to JSON:", err);
@@ -216,10 +330,22 @@ async function getEmployee(email: string): Promise<any | null> {
 }
 
 async function addLink(link: any): Promise<void> {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       await activePool.query(
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      await pool.query(
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
         "INSERT INTO links (id, title, url, description, category, addedBy, createdAt, forInactive) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [link.id, link.title, link.url, link.description, link.category, link.addedBy, link.createdAt, link.forInactive ? 1 : 0]
       );
@@ -234,10 +360,22 @@ async function addLink(link: any): Promise<void> {
 }
 
 async function deleteLink(id: string): Promise<boolean> {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       const [res]: [any, any] = await activePool.query("DELETE FROM links WHERE id = ?", [id]);
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      const [res]: [any, any] = await pool.query("DELETE FROM links WHERE id = ?", [id]);
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
       return res.affectedRows > 0;
     } catch (err) {
       console.error("MySQL query error delete link, fallback to JSON:", err);
@@ -254,10 +392,22 @@ async function deleteLink(id: string): Promise<boolean> {
 }
 
 async function addEmployee(emp: any): Promise<void> {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       await activePool.query(
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      await pool.query(
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
         "INSERT INTO employees (email, addedAt, role, passcode) VALUES (?, ?, ?, ?)",
         [emp.email, emp.addedAt, emp.role, emp.passcode]
       );
@@ -273,10 +423,22 @@ async function addEmployee(emp: any): Promise<void> {
 
 async function deleteEmployee(email: string): Promise<boolean> {
   const cleanEmail = email.trim().toLowerCase();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   const activePool = await getPool();
   if (isMySqlActive && activePool) {
     try {
       const [res]: [any, any] = await activePool.query("DELETE FROM employees WHERE LOWER(email) = ?", [cleanEmail]);
+<<<<<<< HEAD
+=======
+=======
+  if (isMySqlActive && pool) {
+    try {
+      const [res]: [any, any] = await pool.query("DELETE FROM employees WHERE LOWER(email) = ?", [cleanEmail]);
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
       return res.affectedRows > 0;
     } catch (err) {
       console.error("MySQL query error delete employee, fallback to JSON:", err);
@@ -292,11 +454,29 @@ async function deleteEmployee(email: string): Promise<boolean> {
   return false;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 export const app = express();
 app.use(express.json());
 
 // API endpoints FIRST
 app.get("/api/portal-data", async (req, res) => {
+<<<<<<< HEAD
+=======
+=======
+async function startServer() {
+  const app = express();
+  app.use(express.json());
+
+  // Attempt to initialize MySQL database connection pool (Laragon/Local/Docker support)
+  await initializeMySql();
+
+  // API endpoints FIRST
+  app.get("/api/portal-data", async (req, res) => {
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
     try {
       const links = await getAllLinks();
       const employees = await getAllEmployees();
@@ -567,6 +747,7 @@ Your output must be returned strictly formatted as JSON according to the schema.
     }
 
     // Check if employee is registered dynamically
+<<<<<<< HEAD
     let employee = await getEmployee(trimmedEmail);
 
     // Fallback dictionary for initial defaults
@@ -577,6 +758,9 @@ Your output must be returned strictly formatted as JSON according to the schema.
         employee = { email: trimmedEmail, role: "viewer" };
       }
     }
+=======
+    const employee = await getEmployee(trimmedEmail);
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 
     if (!employee) {
       return res.status(404).json({ 
@@ -599,6 +783,7 @@ Your output must be returned strictly formatted as JSON according to the schema.
     const trimmedUsername = username.trim().toLowerCase();
     const cleanPassword = password.trim();
 
+<<<<<<< HEAD
     if (
       (trimmedUsername === "admin" || 
        trimmedUsername === "admin@callboxinc.com" || 
@@ -608,6 +793,10 @@ Your output must be returned strictly formatted as JSON according to the schema.
     ) {
       const email = trimmedUsername.includes("@") ? trimmedUsername : "admin@callboxinc.com";
       return res.json({ success: true, user: { email, role: "admin" } });
+=======
+    if (trimmedUsername === "admin" && cleanPassword === "123456789") {
+      return res.json({ success: true, user: { email: "admin@callboxinc.com", role: "admin" } });
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
     }
 
     // Load user and check if administrator
@@ -727,10 +916,19 @@ Your output must be returned strictly formatted as JSON according to the schema.
     res.json({ success: true, email: trimmedEmail });
   });
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 async function startServer() {
   // Attempt to initialize MySQL database connection pool (Laragon/Local/Docker support)
   await getPool();
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
   // Serve client production bundle or mount Vite middleware
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -754,11 +952,23 @@ async function startServer() {
   });
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 if (!process.env.VERCEL) {
   startServer().catch((err) => {
     console.error("Fatal error while bootstrapping the Callbox Davao portal server:", err);
   });
 }
+<<<<<<< HEAD
+=======
+=======
+startServer().catch((err) => {
+  console.error("Fatal error while bootstrapping the Callbox Davao portal server:", err);
+});
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
+>>>>>>> 01ceae35413996d21583bcf761a4d95aff2097a1
 
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
