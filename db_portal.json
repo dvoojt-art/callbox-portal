@@ -1,0 +1,84 @@
+{
+  "links": [
+    {
+      "id": "redline-dialer",
+      "title": "Redline Dialer",
+      "url": "https://redline.callboxinc.com",
+      "description": "High-velocity client campaign calling platform utilized by Callbox outbound call operators.",
+      "category": "Operations",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:26:00.000Z",
+      "forInactive": false
+    },
+    {
+      "id": "callbox-pipeline",
+      "title": "Callbox Pipeline CRM",
+      "url": "https://pipeline.callboxinc.com",
+      "description": "Proprietary Lead Management and Lead Nurturing system indicating active email sequence templates.",
+      "category": "Operations",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:27:00.000Z",
+      "forInactive": false
+    },
+    {
+      "id": "hr-portal",
+      "title": "Callbox Employee HR Portal & Payroll",
+      "url": "https://hr.callboxinc.com",
+      "description": "Access compensation summaries, file sick/vacation leave requests, and audit biometric finger clock logs.",
+      "category": "HR & Benefits",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:28:00.000Z",
+      "forInactive": true
+    },
+    {
+      "id": "it-support-ticket",
+      "title": "Davao IT Support Helpdesk",
+      "url": "https://support.callboxinc.com",
+      "description": "Raise IT service requests for workstation networking parameters, password resets, and dialer connectivity.",
+      "category": "IT Support",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:29:00.000Z",
+      "forInactive": true
+    },
+    {
+      "id": "callbox-academy",
+      "title": "Callbox Training Academy",
+      "url": "https://academy.callboxinc.com",
+      "description": "Required modules, certification workshops, and interactive courses for telemarketing execution.",
+      "category": "Training",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:30:00.000Z",
+      "forInactive": false
+    },
+    {
+      "id": "campaigns-queue",
+      "title": "Active Client Campaigns Directive",
+      "url": "https://campaigns.callboxinc.com",
+      "description": "Central list repository that contains talking points, dial lists, and instructions for ongoing outbound projects.",
+      "category": "Campaigns",
+      "addedBy": "hr@callboxinc.com",
+      "createdAt": "2026-05-26T21:31:00.000Z",
+      "forInactive": false
+    }
+  ],
+  "employees": [
+    {
+      "email": "ojt@callboxinc.com",
+      "addedAt": "2026-05-24T23:41:52.387Z",
+      "role": "viewer",
+      "passcode": "9311"
+    },
+    {
+      "email": "hr@callboxinc.com",
+      "addedAt": "2026-05-24T22:40:14.413Z",
+      "role": "admin",
+      "passcode": "123456789"
+    },
+    {
+      "email": "admin_davao@callboxinc.com",
+      "addedAt": "2026-05-24T22:40:14.413Z",
+      "role": "admin",
+      "passcode": "123456789"
+    }
+  ]
+}
