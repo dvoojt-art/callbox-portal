@@ -30,7 +30,10 @@
   },
   "include": [
     "src/**/*",
+<<<<<<< HEAD
     "api/**/*",
+=======
+>>>>>>> 5c6b2b222b9ee6d681b245622d8d641bc7ce0f0d
     "server.ts",
     "vite.config.ts"
   ],
