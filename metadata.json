@@ -1,0 +1,6 @@
+{
+  "name": "Callbox Davao Portal",
+  "description": "A high-end, award-style secure web portal for Callbox Davao employees to view and manage registered internal links with employee domain filtering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

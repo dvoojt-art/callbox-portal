@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Callbox Davao</title>
+    <script>
+      // Immediately suppress benign dev server WebSocket errors before any ESM modules load
+      (function() {
+        var isWebsocketError = function(err) {
+          if (!err) return false;
+          var msg = typeof err === "string" ? err : String(err.message || err.reason || err);
+          return (
+            msg.includes("WebSocket") || 
+            msg.includes("websocket") || 
+            msg.includes("HMR") || 
+            msg.includes("vite") || 
+            msg.includes("ws://") || 
+            msg.includes("wss://") ||
+            msg.includes("closed without opened")
+          );
+        };
+        window.addEventListener("unhandledrejection", function(event) {
+          if (isWebsocketError(event.reason)) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        });
+        window.addEventListener("error", function(event) {
+          if (isWebsocketError(event.message) || isWebsocketError(event.error)) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        });
+      })();
+    </script>
+    <!-- Premium Google Fonts for Awwwards style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-zinc-950 text-zinc-50 overflow-x-hidden antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
